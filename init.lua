@@ -157,7 +157,7 @@ require('lazy').setup({
     config = function()
       vim.opt.termguicolors = true
       vim.g.sonokai_style = 'espresso'
-      vim.g.sonokai_better_performance = true
+      -- vim.g.sonokai_better_performance = true
       vim.cmd.colorscheme 'sonokai'
     end,
   },
@@ -181,8 +181,22 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
+    config = function()
+      local hooks = require "ibl.hooks"
+      require("ibl").setup {
+        scope = {
+          highlight = {
+            "Red",
+            "Yellow",
+            "Blue",
+            "Orange",
+            "Green",
+            "Purple",
+          }
+        }
+      }
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    end,
   },
 
   -- "gc" to comment visual regions/lines
