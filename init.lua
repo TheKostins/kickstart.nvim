@@ -43,6 +43,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.wo.relativenumber = true
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -110,7 +112,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -152,7 +154,7 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    "sainnhe/sonokai",
+    'sainnhe/sonokai',
     priority = 1000,
     config = function()
       vim.opt.termguicolors = true
@@ -182,18 +184,18 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     config = function()
-      local hooks = require "ibl.hooks"
-      require("ibl").setup {
+      local hooks = require 'ibl.hooks'
+      require('ibl').setup {
         scope = {
           highlight = {
-            "Red",
-            "Yellow",
-            "Blue",
-            "Orange",
-            "Green",
-            "Purple",
-          }
-        }
+            'Red',
+            'Yellow',
+            'Blue',
+            'Orange',
+            'Green',
+            'Purple',
+          },
+        },
       }
       hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
     end,
@@ -350,8 +352,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_instarled = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-      'bash', 'fish', 'haskell' },
+    ensure_instarled = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'fish', 'haskell' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
@@ -580,3 +581,6 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- load custom config
+require 'custom.init'
